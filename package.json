@@ -9,10 +9,14 @@
     "server": "webpack-dev-server --hot --inline --progress --colors",
     "deploy": "cross-env NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
+  "babel": {
+    "plugins": [["import", { "libraryName": "antd", "style": "css" }]]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "antd": "^2.3.2",
     "g2": "^2.1.1",
     "g2-react": "^1.1.0",
     "jquery": "^3.1.1",
