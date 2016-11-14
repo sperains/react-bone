@@ -2,7 +2,7 @@
 import React , { Component , PropTypes } from 'react' ;
 import { connect } from 'react-redux';
 import { addTodo , completeTodo , setVisibilityFilter , VisibilityFilters} from '../actions/actions';
-import AddTodo from '../compoents/AddTodo';
+import AddTodo from '../components/AddTodo';
 
 
 class App extends Component{
