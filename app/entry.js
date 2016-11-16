@@ -3,17 +3,20 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-
-import App from './containers/App';
+import  {Router , Route , IndexRoute , Redirect} from 'react-router';
+import createHistory from 'history/lib/createHashHistory';
+import Main from './containers/Main';
 import store from './store.js';
 
-console.log(store.getState());
+let root = $('#container')[0];
 
-let container = $('#container')[0];
+const history = createHistory();
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+    	<Router history={history}>
+    		<Route  path="/" component={Main}/>
+    	</Router>
     </Provider>,
-    container
+    root
 );
