@@ -13,8 +13,9 @@ var webpack = require('webpack');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const localHost = '192.168.31.173';
-const port = 8088;
+const localHost = 'www.joyiou.com/';
+// const localHost = "www.ldted.com/";
+const domin = "mp/"
 
 var isProduction = function () {
     return process.env.NODE_ENV === 'production';
@@ -25,7 +26,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'javascripts/app.js',
-        publicPath: "http://"+localHost+":" + port + "/" 
+        publicPath: "http://"+localHost + domin
     },
 
     //热部署相关配置
@@ -41,8 +42,7 @@ module.exports = {
         watchOptions: {
             aggregateTimeout: 300
         },
-        host: localHost ,
-        port: port
+        host: localHost + domin
     },
 
     plugins: [
@@ -58,6 +58,14 @@ module.exports = {
         // }),
         // 把jquery作为全局变量插入到所有的代码中
         // 然后就可以直接在页面中使用jQuery了
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify('production')
+          },
+          __DEV__: 'false',
+          __SERVER_URL__: JSON.stringify(localHost),
+        }),
+        new webpack.optimize.UglifyJsPlugin(),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -65,7 +73,7 @@ module.exports = {
         }),
         //生成index.html页面
         new HtmlWebpackPlugin({
-            title: 'rains',
+            title: '喜悦来了',
             filename: 'index.html',
             template:'template/index.template.html',      //按照此文件内容生成index.html
             inject: 'body',
@@ -82,11 +90,6 @@ module.exports = {
             compress: {
                 warnings: false
             },
-        }),
-
-
-        new webpack.DefinePlugin({
-            __DEV__: 'false'
         })
     ],
 
